@@ -454,73 +454,73 @@ def update_graph(display_mode, year_choice, model_choice, start_date, end_date, 
 
     # MODE: Raw Data – Plot actual power and optional additional feature.
     elif display_mode == "raw":
-    fig = go.Figure()
+        fig = go.Figure()
 
-    # Add primary trace for actual power consumption
-    fig.add_trace(go.Scatter(
-        x=df_filtered["Date_start"],
-        y=df_filtered["Power_kW"],
-        mode="lines",
-        name="Actual Power",
-        line={"width": 2}
-    ))
+        # Add primary trace for actual power consumption
+        fig.add_trace(go.Scatter(
+            x=df_filtered["Date_start"],
+            y=df_filtered["Power_kW"],
+            mode="lines",
+            name="Actual Power",
+            line={"width": 2}
+        ))
 
-    extra_axes_layout = {}
-    axis_width = 0.04
-    if feature_choice and len(feature_choice) > 0:
-        for i, feat in enumerate(feature_choice):
-            if feat in df_filtered.columns:
-                axis_id = f"y{i + 2}"
-                layout_key = f"yaxis{i + 2}"
-                pos = 1 - ((i + 1) * axis_width)
-                fig.add_trace(go.Scatter(
-                    x=df_filtered["Date_start"],
-                    y=df_filtered[feat],
-                    mode="lines",
-                    name=feat,
-                    line={"dash": "dot", "width": 2},
-                    yaxis=axis_id
-                ))
-                extra_axes_layout[layout_key] = dict(
-                    overlaying='y',
-                    side='right',
-                    position=pos,
-                    showgrid=False,
-                    title=''
-                )
+        extra_axes_layout = {}
+        axis_width = 0.04
+        if feature_choice and len(feature_choice) > 0:
+            for i, feat in enumerate(feature_choice):
+                if feat in df_filtered.columns:
+                    axis_id = f"y{i + 2}"
+                    layout_key = f"yaxis{i + 2}"
+                    pos = 1 - ((i + 1) * axis_width)
+                    fig.add_trace(go.Scatter(
+                        x=df_filtered["Date_start"],
+                        y=df_filtered[feat],
+                        mode="lines",
+                        name=feat,
+                        line={"dash": "dot", "width": 2},
+                        yaxis=axis_id
+                    ))
+                    extra_axes_layout[layout_key] = dict(
+                        overlaying='y',
+                        side='right',
+                        position=pos,
+                        showgrid=False,
+                        title=''
+                    )
 
-    # Update layout before adding the annotation
-    fig.update_layout(
-        title="Actual Power Consumption",
-        xaxis_title="Date",
-        yaxis=dict(title="Power (kW)"),
-        margin=dict(r=200),
-        **extra_axes_layout
-    )
+        # Update layout before adding the annotation
+        fig.update_layout(
+            title="Actual Power Consumption",
+            xaxis_title="Date",
+            yaxis=dict(title="Power (kW)"),
+            margin=dict(r=200),
+            **extra_axes_layout
+        )
 
-    # Calculate total and average consumption in kWh
-    total_consumption_kWh = df_filtered["Power_kW"].sum()
-    average_consumption_kWh = df_filtered["Power_kW"].mean()
+        # Calculate total and average consumption in kWh
+        total_consumption_kWh = df_filtered["Power_kW"].sum()
+        average_consumption_kWh = df_filtered["Power_kW"].mean()
 
-    # Convert consumption to MWh (if the values are in kWh, divide by 1000)
-    total_consumption_MWh = total_consumption_kWh / 1000.0
-    average_consumption_MWh = average_consumption_kWh / 1000.0
+        # Convert consumption to MWh (if the values are in kWh, divide by 1000)
+        total_consumption_MWh = total_consumption_kWh / 1000.0
+        average_consumption_MWh = average_consumption_kWh / 1000.0
 
-    # Add annotation showing consumption over the selected time range
-    fig.add_annotation(
-        x=0.5,
-        y=1.15,
-        xref="paper",
-        yref="paper",
-        text=(f"Total Consumption: {total_consumption_MWh:.2f} MWh | "
-              f"Average Hourly Consumption: {average_consumption_MWh:.2f} MWh (Over the selected time range)"),
-        showarrow=False,
-        font=dict(size=14, color="black"),
-        align="center"
-    )
-    fig.update_layout(margin=dict(t=120))
+        # Add annotation showing consumption over the selected time range
+        fig.add_annotation(
+            x=0.5,
+            y=1.15,
+            xref="paper",
+            yref="paper",
+            text=(f"Total Consumption: {total_consumption_MWh:.2f} MWh | "
+                  f"Average Hourly Consumption: {average_consumption_MWh:.2f} MWh (Over the selected time range)"),
+            showarrow=False,
+            font=dict(size=14, color="black"),
+            align="center"
+        )
+        fig.update_layout(margin=dict(t=120))
 
-    return fig
+        return fig
 
 
 
