@@ -174,6 +174,10 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "Power Forecast Dashboard"
 container_style = {"margin": "20px", "fontFamily": "'Montserrat', sans-serif"}
 
+####
+server=app.server
+####
+
 app.layout = html.Div(style=container_style, children=[
 
     # =========================
