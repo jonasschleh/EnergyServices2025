@@ -512,8 +512,8 @@ def update_graph(display_mode, year_choice, model_choice, start_date, end_date, 
         y=1.15,
         xref="paper",
         yref="paper",
-        text=(f"Total Consumption: {total_consumption_MWh:.2f} MWh (über den ausgewählten Zeitbereich) | "
-              f"Average Consumption: {average_consumption_MWh:.2f} MWh (über den ausgewählten Zeitbereich)"),
+        text=(f"Total Consumption: {total_consumption_MWh:.2f} MWh | "
+              f"Average Hourly Consumption: {average_consumption_MWh:.2f} MWh (Over the selected time range)"),
         showarrow=False,
         font=dict(size=14, color="black"),
         align="center"
