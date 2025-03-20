@@ -171,6 +171,11 @@ def filter_data_by_range(df, start_perc, end_perc):
 # -------------------------------
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+###
+server=app.server
+###
+
 app.title = "Power Forecast Dashboard"
 container_style = {"margin": "20px", "fontFamily": "'Montserrat', sans-serif"}
 
