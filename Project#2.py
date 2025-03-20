@@ -239,7 +239,7 @@ app.layout = html.Div(style=container_style, children=[
                 dcc.Dropdown(
                     id="model-dropdown",
                     options=[
-                        {"label": "Random Forest", "value": "Random Forest"},
+                        #{"label": "Random Forest", "value": "Random Forest"},
                         {"label": "Linear Regression", "value": "Linear Regression"},
                         {"label": "XGBoost", "value": "XGBoost"}
                     ],
@@ -531,14 +531,14 @@ def update_graph(display_mode, year_choice, model_choice, start_date, end_date, 
         else:
             try:
                 # Keep your existing logic for loading models and generating predictions
-                if model_choice == "Random Forest":
-                    model_file = "random_forest_model_jonas.pkl"
-                elif model_choice == "XGBoost":
+                #if model_choice == "Random Forest":
+                #    model_file = "random_forest_model_jonas.pkl"
+                if model_choice == "XGBoost":
                     model_file = "xgboost_model_jonas.pkl"
                 elif model_choice == "Linear Regression":
                     model_file = "linear_regression_model_jonas.pkl"
                 else:
-                    model_file = "random_forest_model_jonas.pkl"
+                    model_file = "linear_regression_model_jonas.pkl" #"random_forest_model_jonas.pkl"
                 with open(model_file, "rb") as f:
                     model = pickle.load(f)
 
